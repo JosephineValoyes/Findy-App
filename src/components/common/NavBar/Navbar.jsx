@@ -16,11 +16,11 @@ const Navbar = () => {
   const menuItem = (
     <>
       <Link to="/" onClick={closeMenu}>Home</Link>
-      <Link to="/Login" onClick={closeMenu}>Login</Link>
-      <Link to="/Profile" onClick={closeMenu}>Profile</Link>
-      <Link to="/PostDetails" onClick={closeMenu}>PostDetails</Link>
-      <Link to="/Register" onClick={closeMenu}>Register</Link>
-      <Link to="/Dashboard" onClick={closeMenu}>Dashboard</Link>
+      <Link to="/login" onClick={closeMenu}>Login</Link>
+      <Link to="/profile" onClick={closeMenu}>Profile</Link>
+      <Link to="/postDetails" onClick={closeMenu}>PostDetails</Link>
+      <Link to="/register" onClick={closeMenu}>Register</Link>
+      <Link to="/dashboard" onClick={closeMenu}>Dashboard</Link>
     </>
   )
 
