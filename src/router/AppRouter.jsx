@@ -9,19 +9,20 @@ import NotFound from "../pages/NotFound/NotFound";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import Profile from "../pages/Profile/Profile";
 import PostDetails from "../pages/PostDetails/PostDetails"
+import useAppContext from "../hooks/useAppContext";
 
 const AppRouter = () => {
-
+  const { user } = useAppContext();
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Layout />} >
           <Route index element={<Home />} />
-          <Route element={<PublicRoutes isAuthenticated={false} />}>
+          <Route element={<PublicRoutes isAuthenticated={user.isAuth} />}>
             <Route path='login' element={<Login />} />
             <Route path='register' element={<Register />} />
           </Route>
-          <Route element={<PrivateRoutes isAuthenticated={false}/>}>
+          <Route element={<PrivateRoutes isAuthenticated={user.isAuth}/>}>
             <Route path='dashboard' element={<Dashboard/>}>
                 <Route path=':dashboardid' element={<Profile/>} />            
             </Route>          

@@ -3,8 +3,9 @@ import { Formik } from "formik";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
-//import fileUpload from "../../services/fileUpload";
-//import { createUser } from "../../services/userServices";
+import fileUpload from "../../services/fileUpload";
+import { createUser } from "../../services/userServices";
+
 
 const passwordRegex =
   /^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,16}$/;

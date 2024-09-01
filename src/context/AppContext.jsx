@@ -1,7 +1,7 @@
 import { createContext, useReducer } from "react";
 import PropTypes from "prop-types";
 import userReducer from "../reducers/userReducer";
-import newsReducer from "../reducers/newsReducer";
+import newsReducer from "../reducers/newReducer";
 
 // 1. Crear el contexto
 export const AppContext = createContext(null);
@@ -11,13 +11,11 @@ export const AppContext = createContext(null);
 const AppContextProvider = ({ children }) => {
   const [user, userDispatch] = useReducer(userReducer, {
     user: null,
-    isAuth: true,
+    isAuth: false,
   });
   const [news, newsDispatch] = useReducer(newsReducer, {
     news: [],
     statusFilter: false,
-    loading: false,
-    error: null,
   });
 
   const globalState = {

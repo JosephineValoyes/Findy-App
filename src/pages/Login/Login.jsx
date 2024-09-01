@@ -3,42 +3,37 @@ import { FaArrowLeft, FaEye, FaEyeSlash } from "react-icons/fa";
 import { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-//import { login } from "../../services/userServices";
-//import useAppContext from "../../hooks/useAppContext";
+import { login } from "../../services/userServices";
+import useAppContext from "../../hooks/useAppContext";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [showpassword,setShowPassword] = useState(false)
-  const handleShowPassword = () => {
-    setShowPassword(!showpassword)
-  }
+  const { userDispatch } = useAppContext();
 
   const formik = useFormik({
     initialValues: {email: '', password: ''},
     validationSchema: Yup.object().shape({email: Yup.string().email("Ingrese un email valido").required("Requerido"), password:Yup.string().required("Contraseña Requerida")}),
-    onSubmit: (values)=>{
-      console.table(values)
-    }
-  })
-  //   onSubmit: async (values) => {
-  //     console.table(values);
-  //     const loggedUser = await login(values);
-  //     console.table(loggedUser);
-  //     if (loggedUser) {
-  //       userDispatch({
-  //         type: "LOGIN",
-  //         payload: loggedUser,
-  //       });
-  //       alert(`${loggedUser.name}, te damos la bienvenida`);
-  //       navigate("/news");
-  //     } else {
-  //       alert(
-  //         "Ha ocurrido un error en el inicio de sesión, por favor verifique sus credenciales"
-  //       );
-  //     }
-  //   },
-  // });
+    onSubmit: async (values) => {
+      console.table(values);
+      const loggedUser = await login(values);
+      console.table(loggedUser);
+      if (loggedUser) {
+        userDispatch({
+          type: "LOGIN",
+          payload: loggedUser,
+        });
+        alert(`${loggedUser.name}, te damos la bienvenida`);
+        navigate("/dashboard");
+      } else {
+        alert(
+          "Ha ocurrido un error en el inicio de sesión, por favor verifique sus credenciales"
+        );
+      }
+    },
+  });
 
-  // const handleShowPassword = () => setShowPassword(!showPassword);
+  const handleShowPassword = () => setShowPassword(!showpassword);
 
   return (
     <main className="flex flex-col grow gap-3.5 mt-3 px-2">
