@@ -10,4 +10,4 @@ export default {
     // postcssPresetEnv(),
     cssnano({ preset: "default" }), // Solo en producción
   ],
-};
+}; 
