@@ -3,7 +3,7 @@
 
 const Home = () => {
     return (
-        <div className="bg-gray-100 min-h-screen w-[430px] mx-auto p-4 rounded-lg shadow-lg">
+        <div className="bg-gray-100  w-[430px] h-[932px] mx-auto p-4 rounded-lg shadow-lg">
       {/* Header */}
       <header className="flex items-center justify-between mb-4">
         <img src="src\assets\common\Icon\LOGOLOGO 3.png" alt="Findy Logo" className="w-24 h-auto"/>
