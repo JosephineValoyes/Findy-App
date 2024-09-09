@@ -15,7 +15,6 @@ const Navbar = () => {
 
   const menuItem = (
     <>
-      <Link to="/" onClick={closeMenu}>Home</Link>
       <Link to="/login" onClick={closeMenu}>Login</Link>
       <Link to="/profile" onClick={closeMenu}>Profile</Link>
       <Link to="/register" onClick={closeMenu}>Register</Link>

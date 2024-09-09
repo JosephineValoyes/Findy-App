@@ -1,6 +1,5 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Layout from "../components/Layout/Layout";
-import Home from "../pages/Home/Home";
 import PublicRoutes from "./PublicRoutes";
 import PrivateRoutes from "./PrivateRoutes";
 import Login from "../pages/Login/Login";
@@ -16,7 +15,7 @@ const AppRouter = () => {
     <Router>
       <Routes>
         <Route path="/" element={<Layout />} >
-          <Route index element={<Home/>} />
+          <Route path="/" element={<Login/>} />
           <Route element={<PublicRoutes isAuthenticated={user.isAuth} />}>
             <Route path='login' element={<Login />} />
             <Route path='register' element={<Register />} />
