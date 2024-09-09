@@ -1,20 +1,19 @@
-//import  "../components/common/Header"
-//import "../components/common/Footer"
+
 
 const Home = () => {
     return (
         <div className="bg-gray-100  w-[430px] h-[932px] mx-auto p-4 rounded-lg shadow-lg">
       {/* Header */}
       <header className="flex items-center justify-between mb-4">
-        <img src="src\assets\common\Icon\LOGOLOGO 3.png" alt="Findy Logo" className="w-24 h-auto"/>
-        <div className="flex items-center space-x-4">
+        <img src="src\assets\common\Icon\LOGOLOGO 3.png" alt="Findy Logo" className="w-28 mt-8 h-auto"/>
+        <div className="flex items-center mr-8 mt-8 space-x-2">
           <img src="src\assets\common\img\Ellipse 11.png" alt="Your Story" className="w-10 h-10 rounded-full border-2 border-pink-500" />
           <img src="src\assets\common\img\jennie-blackpink-uhdpaper.com-hd-4 1.png" alt="Jennie Kim" className="w-10 h-10 rounded-full border-2 border-pink-500" />
           <img src="src\assets\common\img\HD-wallpaper-rose-blackpink-korean 1.png" alt="Roseanne Park" className="w-10 h-10 rounded-full border-2 border-pink-500" />
           <img src="src\assets\common\img\Kim-ji-soo.png" alt="Kim Ji-soo" className="w-10 h-10 rounded-full border-2 border-pink-500" />
           <img src="src\assets\common\img\Lalisa_manob.png" alt="Lalisa Manoban" className="w-10 h-10 rounded-full border-2 border-pink-500" />
         </div>
-        <div className="flex space-x-4">
+        <div className="flex space-x-2 mr-4 mt-8">
           <button>
             <img src="src\assets\common\Icon\VectorL.png" alt="Like" className="w-6 h-6" />
           </button>
@@ -90,7 +89,7 @@ const Home = () => {
         </button>
       </footer>
     </div>
-          );
-        };
+    );
+  };
         
 export default Home

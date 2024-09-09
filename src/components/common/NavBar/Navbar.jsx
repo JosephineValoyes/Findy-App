@@ -18,7 +18,6 @@ const Navbar = () => {
       <Link to="/" onClick={closeMenu}>Home</Link>
       <Link to="/login" onClick={closeMenu}>Login</Link>
       <Link to="/profile" onClick={closeMenu}>Profile</Link>
-      <Link to="/postDetails" onClick={closeMenu}>PostDetails</Link>
       <Link to="/register" onClick={closeMenu}>Register</Link>
       <Link to="/dashboard" onClick={closeMenu}>Dashboard</Link>
     </>
@@ -26,12 +25,6 @@ const Navbar = () => {
 
   return (
     <>
-
-      {/* Desktop Menu */}
-      <nav className='hidden md:flex gap-6 backdrop-blur-xl h-full items-center w-[51.875rem] justify-center'>
-        {menuItem}
-      </nav>
-
       {/* Botón Mobile Menu */}
       <button className="block md:hidden" onClick={toggleMenu}>
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="21"><g fill="#D0D6F9" fillRule="evenodd"><path d="M0 0h24v3H0zM0 9h24v3H0zM0 18h24v3H0z" /></g></svg>

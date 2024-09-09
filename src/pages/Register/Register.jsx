@@ -28,203 +28,217 @@ const Register = () => {
     });
   };
   return (
-    <main className="flex flex-col grow gap-3.5 mt-3 px-2">
-      <h1 className="font-serif text-center text-2xl">Cree una cuenta</h1>
-      <Formik
-        initialValues={{
-          name: "",
-          email: "",
-          password: "",
-          repeatPassword: "",
-          avatar: null,
-        }}
-        validationSchema={Yup.object().shape({
-          name: Yup.string()
-            .required("Por favor ingrese su nombre completo")
-            .max(20, "Su nombre no puede exceder los 20 caracteres")
-            .min(10, "Su nombre no puede contener menos de 10 caracteres"),
-          email: Yup.string()
-            .required("Por favor ingrese su email")
-            .email("Por favor ingrese un email válido"),
-          password: Yup.string()
-            .required("Por favor ingrese una contraseña")
-            .matches(
-              passwordRegex,
-              "La contraseña al menos debe tener un dígito, una minúscula, una mayúscula y al menos un caracter no alfanumérico, debe contener más de 8 caracteres pero no exceder los 16 caracteres. "
-            )
-            .oneOf(
-              [Yup.ref("repeatPassword")],
-              "La contraseña ingresada no coincide"
-            ),
-          repeatPassword: Yup.string()
-            .required("Por favor confirme la contraseña")
-            .matches(
-              passwordRegex,
-              "La contraseña al menos debe tener un dígito, una minúscula, una mayúscula y al menos un caracter no alfanumérico, debe contener más de 8 caracteres pero no exceder los 16 caracteres."
-            )
-            .oneOf(
-              [Yup.ref("password")],
-              "La contraseña ingresada no coincide"
-            ),
-          avatar: Yup.mixed().required("Por favor escoja una foto de perfil"),
-        })}
-        onSubmit={async (values) => {
-          const profileImage = await fileUpload(values.avatar);
-          if (profileImage) {
-            values.avatar = profileImage;
-            console.table(values);
-            const newUser = await createUser(values);
-            console.table(newUser);
-            if (newUser) {
-              alert("Su cuenta ha sido creada exitosamente");
-              navigate('/login');
+    <div className="m-auto p-auto w-[428px] h-[926px]">
+      <header className=" relative w-[428px] h-10 bg-gray-200 mt-4">
+        <div >
+        <p className='text-black font-bold absolute left-2 top-[4px] '>9:41</p>
+        <img src="src\assets\common\Icon\cellular.png" alt="cellular bars" className='absolute right-16 top-[8px]' />
+        <img src="src\assets\common\Icon\wi-fi.png" alt="wifi" className='absolute right-11 top-[8px]'/>
+        <img src="src\assets\common\Icon\battery.png" alt="batery" className='absolute right-6 top-[8px]' />
+        
+        </div>
+      </header>
+      <main className="flex flex-col grow gap-8 mt-12 px-2">
+        <h1 className="font-serif text-center text-2xl">Cree una cuenta</h1>
+        <Formik
+          initialValues={{
+            name: "",
+            email: "",
+            password: "",
+            repeatPassword: "",
+            avatar: null,
+          }}
+          validationSchema={Yup.object().shape({
+            name: Yup.string()
+              .required("Por favor ingrese su nombre completo")
+              .max(20, "Su nombre no puede exceder los 20 caracteres")
+              .min(10, "Su nombre no puede contener menos de 10 caracteres"),
+            email: Yup.string()
+              .required("Por favor ingrese su email")
+              .email("Por favor ingrese un email válido"),
+            password: Yup.string()
+              .required("Por favor ingrese una contraseña")
+              .matches(
+                passwordRegex,
+                "La contraseña al menos debe tener un dígito, una minúscula, una mayúscula y al menos un caracter no alfanumérico, debe contener más de 8 caracteres pero no exceder los 16 caracteres. "
+              )
+              .oneOf(
+                [Yup.ref("repeatPassword")],
+                "La contraseña ingresada no coincide"
+              ),
+            repeatPassword: Yup.string()
+              .required("Por favor confirme la contraseña")
+              .matches(
+                passwordRegex,
+                "La contraseña al menos debe tener un dígito, una minúscula, una mayúscula y al menos un caracter no alfanumérico, debe contener más de 8 caracteres pero no exceder los 16 caracteres."
+              )
+              .oneOf(
+                [Yup.ref("password")],
+                "La contraseña ingresada no coincide"
+              ),
+            avatar: Yup.mixed().required("Por favor escoja una foto de perfil"),
+          })}
+          onSubmit={async (values) => {
+            const profileImage = await fileUpload(values.avatar);
+            if (profileImage) {
+              values.avatar = profileImage;
+              console.table(values);
+              const newUser = await createUser(values);
+              console.table(newUser);
+              if (newUser) {
+                alert("Su cuenta ha sido creada exitosamente");
+                navigate('/login');
+              } else {
+                alert("Ha ocurrido un error en la creación de su cuenta");
+              }
             } else {
-              alert("Ha ocurrido un error en la creación de su cuenta");
+              alert("Ha ocurrido un error en la carga de la imagen");
             }
-          } else {
-            alert("Ha ocurrido un error en la carga de la imagen");
-          }
-        }}
-      >
-        {({ handleSubmit, getFieldProps, errors, touched, setFieldValue }) => (
-          <form className="flex flex-col gap-1" onSubmit={handleSubmit}>
-            <label className="font-bold" htmlFor="name">
-              Nombre completo:
-            </label>
-            <input
-              type="text"
-              id="name"
-              {...getFieldProps("name")}
-              className={
-                touched.name && errors.name
-                  ? "p-4 rounded border border-pink-500 text-pink-600 focus:ring-pink-500"
-                  : "p-4 rounded border border-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
-              }
-            />
-            {touched.name && errors.name ? (
-              <span className="text-pink-600">{errors.name}</span>
-            ) : null}
-            <label className="font-bold" htmlFor="email">
-              Correo electrónico:
-            </label>
-            <input
-              type="email"
-              id="email"
-              {...getFieldProps("email")}
-              className={
-                touched.name && errors.name
-                  ? "p-4 rounded border border-pink-500 text-pink-600 focus:ring-pink-500"
-                  : "p-4 rounded border border-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
-              }
-            />
-            {touched.email && errors.email ? (
-              <span className="text-pink-600">{errors.email}</span>
-            ) : null}
-            <label className="font-bold" htmlFor="password">
-              Contraseña:
-            </label>
-            <div className=" flex relative items-center">
+          }}
+        >
+          {({ handleSubmit, getFieldProps, errors, touched, setFieldValue }) => (
+            <form className="flex flex-col gap-1" onSubmit={handleSubmit}>
+              <label className="font-bold" htmlFor="name">
+                Nombre completo:
+              </label>
               <input
-                type={showPassword.password ? "text" : "password"}
-                id="password"
-                {...getFieldProps("password")}
+                type="text"
+                id="name"
+                {...getFieldProps("name")}
                 className={
-                  touched.password && errors.password
-                    ? "p-4 grow rounded border border-pink-500 text-pink-600 focus:ring-pink-500"
-                    : "p-4 grow rounded border border-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
+                  touched.name && errors.name
+                    ? "p-4 rounded border border-pink-500 text-pink-600 focus:ring-pink-500"
+                    : "p-4 rounded border border-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
                 }
               />
-              <button
-                type="button"
-                onClick={() => handleShowPassword("password")}
-                className={
-                  touched.password && errors.password
-                    ? "absolute right-4 text-pink-600 "
-                    : "absolute right-4 text-slate-400 "
-                }
-              >
-                {showPassword.password ? <FaEye /> : <FaEyeSlash />}
-              </button>
-            </div>
-            {touched.password && errors.password ? (
-              <span className="text-pink-600">{errors.password}</span>
-            ) : null}
-            <label className="font-bold" htmlFor="repeatPasswod">
-              Confirmar contraseña:
-            </label>
-            <div className=" flex relative items-center">
+              {touched.name && errors.name ? (
+                <span className="text-pink-600">{errors.name}</span>
+              ) : null}
+              <label className="font-bold" htmlFor="email">
+                Correo electrónico:
+              </label>
               <input
-                type={showPassword.repeatPassword ? "text" : "password"}
-                id="repeatPassword"
-                {...getFieldProps("repeatPassword")}
+                type="email"
+                id="email"
+                {...getFieldProps("email")}
                 className={
-                  touched.repeatPassword && errors.repeatPassword
-                    ? "p-4 grow rounded border border-pink-500 text-pink-600 focus:ring-pink-500"
-                    : "p-4 grow rounded border border-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
+                  touched.name && errors.name
+                    ? "p-4 rounded border border-pink-500 text-pink-600 focus:ring-pink-500"
+                    : "p-4 rounded border border-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
                 }
               />
-              <button
-                type="button"
-                onClick={() => handleShowPassword("repeatPassword")}
-                className={
-                  touched.repeatPassword && errors.repeatPassword
-                    ? "absolute right-4 text-pink-600 "
-                    : "absolute right-4 text-slate-400 "
-                }
-              >
-                {showPassword.repeatPassword ? <FaEye /> : <FaEyeSlash />}
-              </button>
-            </div>
-            {touched.repeatPassword && errors.repeatPassword ? (
-              <span className="text-pink-600">{errors.repeatPassword}</span>
-            ) : null}
-            <label className="font-bold" htmlFor="avatar">
-              Escoja su foto de perfil:
-            </label>
-            <div className="flex items-center space-x-6">
-              <figure className="shrink-0">
-                <img
-                  className="h-16 w-16 object-cover rounded-full"
-                  src={image}
-                  alt="Current profile photo"
-                />
-              </figure>
-              <input
-                type="file"
-                id="avatar"
-                onChange={(event) => {
-                  const file = event.currentTarget.files[0];
-                  setFieldValue("avatar", file);
-                  if (file) {
-                    setImage(URL.createObjectURL(file));
+              {touched.email && errors.email ? (
+                <span className="text-pink-600">{errors.email}</span>
+              ) : null}
+              <label className="font-bold" htmlFor="password">
+                Contraseña:
+              </label>
+              <div className=" flex relative items-center">
+                <input
+                  type={showPassword.password ? "text" : "password"}
+                  id="password"
+                  {...getFieldProps("password")}
+                  className={
+                    touched.password && errors.password
+                      ? "p-4 grow rounded border border-pink-500 text-pink-600 focus:ring-pink-500"
+                      : "p-4 grow rounded border border-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
                   }
-                }}
-                className={
-                  touched.avatar && errors.avatar
-                    ? "p-4 rounded border border-pink-500 text-pink-600 focus:ring-pink-500 text-transparent w-full text-sm"
-                    : "p-4 rounded border border-slate-400 w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100"
-                }
-              />
-            </div>
-            {touched.avatar && errors.avatar ? (
-              <span className="text-pink-600">{errors.avatar}</span>
-            ) : null}
-            <button
-              className="p-4 bg-orange-500 text-white rounded mt-3 hover:bg-orange-600"
-              type="submit"
-            >
-              Crear cuenta
-            </button>
-          </form>
-        )}
-      </Formik>
-      <p>
-        Si usted ya tiene una cuenta registrada inicie sesión{" "}
-        <Link className="text-sky-900 underline" to={"/login"}>
-          aquí!
-        </Link>
-      </p>
-    </main>
+                />
+                <button
+                  type="button"
+                  onClick={() => handleShowPassword("password")}
+                  className={
+                    touched.password && errors.password
+                      ? "absolute right-4 text-pink-600 "
+                      : "absolute right-4 text-slate-400 "
+                  }
+                >
+                  {showPassword.password ? <FaEye /> : <FaEyeSlash />}
+                </button>
+              </div>
+              {touched.password && errors.password ? (
+                <span className="text-pink-600">{errors.password}</span>
+              ) : null}
+              <label className="font-bold" htmlFor="repeatPasswod">
+                Confirmar contraseña:
+              </label>
+              <div className=" flex relative items-center">
+                <input
+                  type={showPassword.repeatPassword ? "text" : "password"}
+                  id="repeatPassword"
+                  {...getFieldProps("repeatPassword")}
+                  className={
+                    touched.repeatPassword && errors.repeatPassword
+                      ? "p-4 grow rounded border border-pink-500 text-pink-600 focus:ring-pink-500"
+                      : "p-4 grow rounded border border-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
+                  }
+                />
+                <button
+                  type="button"
+                  onClick={() => handleShowPassword("repeatPassword")}
+                  className={
+                    touched.repeatPassword && errors.repeatPassword
+                      ? "absolute right-4 text-pink-600 "
+                      : "absolute right-4 text-slate-400 "
+                  }
+                >
+                  {showPassword.repeatPassword ? <FaEye /> : <FaEyeSlash />}
+                </button>
+              </div>
+              {touched.repeatPassword && errors.repeatPassword ? (
+                <span className="text-pink-600">{errors.repeatPassword}</span>
+              ) : null}
+              <label className="font-bold" htmlFor="avatar">
+                Escoja su foto de perfil:
+              </label>
+              <div className="flex items-center space-x-6">
+                <figure className="shrink-0">
+                  <img
+                    className="h-16 w-16 object-cover rounded-full"
+                    src={image}
+                    alt="Current profile photo"
+                  />
+                </figure>
+                <input
+                  type="file"
+                  id="avatar"
+                  onChange={(event) => {
+                    const file = event.currentTarget.files[0];
+                    setFieldValue("avatar", file);
+                    if (file) {
+                      setImage(URL.createObjectURL(file));
+                    }
+                  }}
+                  className={
+                    touched.avatar && errors.avatar
+                      ? "p-4 rounded border border-pink-500 text-pink-600 focus:ring-pink-500 text-transparent w-full text-sm"
+                      : "p-4 rounded border border-slate-400 w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100"
+                  }
+                />
+              </div>
+              {touched.avatar && errors.avatar ? (
+                <span className="text-[linear-gradient(92.69deg,_#EB5E5C_-0.64%,_#FF7674_101.09%)]">{errors.avatar}</span>
+              ) : null}
+              <button
+                className="p-4 bg-[linear-gradient(92.69deg,_#EB5E5C_-0.64%,_#FF7674_101.09%)] text-white rounded mt-3 hover:bg-orange-600"
+                type="submit"
+              >
+                Crear cuenta
+              </button>
+            </form>
+          )}
+        </Formik>
+        <p>
+          Si usted ya tiene una cuenta registrada inicie sesión{" "}
+          <Link className="text-sky-900 underline" to={"/login"}>
+            aquí!
+          </Link>
+        </p>
+      </main>
+    
+    </div>
+
+
   );
 };
 

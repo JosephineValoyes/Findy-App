@@ -8,7 +8,6 @@ import Register from "../pages/Register/Register";
 import NotFound from "../pages/NotFound/NotFound";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import Profile from "../pages/Profile/Profile";
-import PostDetails from "../pages/PostDetails/PostDetails"
 import useAppContext from "../hooks/useAppContext";
 
 const AppRouter = () => {
@@ -17,7 +16,7 @@ const AppRouter = () => {
     <Router>
       <Routes>
         <Route path="/" element={<Layout />} >
-          <Route index element={<Home />} />
+          <Route index element={<Home/>} />
           <Route element={<PublicRoutes isAuthenticated={user.isAuth} />}>
             <Route path='login' element={<Login />} />
             <Route path='register' element={<Register />} />
@@ -26,7 +25,6 @@ const AppRouter = () => {
             <Route path='dashboard' element={<Dashboard/>}>
                 <Route path=':dashboardid' element={<Profile/>} />            
             </Route>          
-            <Route path="postDetails" element={<PostDetails />} />
             <Route path="profile" element={<Profile />} />
           </Route>
           <Route path="*" element={<NotFound />} />
@@ -39,35 +37,3 @@ const AppRouter = () => {
 
 export default AppRouter;
 
-
-//import useAppContext from "../hooks/useAppContext";
-
-// const AppRouter = () => {
- 
-//   return (
-//     <Router>
-//       <Routes>
-//         <Route path="/" element={<Layout />}>
-//           <Route index element={<Home/>} />
-//           <Route path="login" element={<Login />} />
-//           <Route path="register" element={<Register />} />    
-//           {/* <Route element={<PublicRoutes isAuthenticated={false} />}>
-//             <Route path="login" element={<Login />} />
-//             <Route path="register" element={<Register />} />
-//           </Route> */}
-//           <Route path="Profile" element={<Profile/> } />
-//           <Route path="NotFound" element={<NotFound/> } />
-//           <Route path="PostDetails" element={<PostDetails />}>
-//           <Route path=":DashboardId" element={<Dashboard />} />
-//           {/* <Route element={<PrivateRoutes isAuthenticated={false} />}>
-//             <Route path="PostDetails" element={<PostDetails />}>
-//               <Route path=":DashboardId" element={<Dashboard />} />
-//             </Route>
-//             <Route path="Profile" element={<Profile/> } />
-//             <Route path="NotFound" element={<NotFound/> } />
-//           </Route> */}
-//         </Route>
-//       </Routes>
-//     </Router>
-//   );
-// };

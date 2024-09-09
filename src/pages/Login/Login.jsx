@@ -36,12 +36,22 @@ const Login = () => {
   const handleShowPassword = () => setShowPassword(!showpassword);
 
   return (
-    <main className="flex flex-col grow gap-3.5 mt-3 px-2">
-      <button onClick={() => Navigate(-1)}>
+   <div className="bg-gray-100  w-[430px] h-[932px] mx-auto p-4 rounded-lg shadow-lg" >
+      <header >
+        <div >
+        <p className='text-black font-bold absolute left-2  '>9:41</p>
+        <img src="src\assets\common\Icon\cellular.png" alt="cellular bars" className='absolute right-16 ' />
+        <img src="src\assets\common\Icon\wi-fi.png" alt="wifi" className='absolute right-11 '/>
+        <img src="src\assets\common\Icon\battery.png" alt="batery" className='absolute right-6' />
+        
+        </div>
+      </header>
+      <main className="flex  flex-col h-[600px] items-center grow gap-16 mt-8 px-2 absolute top-20 bg-white rounded-10 border-radius-[10]">
+      <button onClick={() => Navigate(-1)}  className="absolute left-4 mt-4 ">
         <FaArrowLeft />
       </button>
-      <h1 className="font-serif text-center text-2xl">Iniciar sesión</h1>
-      <form className="flex flex-col gap-1" onSubmit={formik.handleSubmit}>
+      <h1 className="font-serif text-center mt-4 text-2xl">Iniciar sesión</h1>
+      <form className="flex flex-col gap-3" onSubmit={formik.handleSubmit}>
         <label className="font-bold" htmlFor="email">
           Correo electrónico
         </label>
@@ -91,18 +101,25 @@ const Login = () => {
         ) : null}
         <button
           type="submit"
-          className="p-4 bg-orange-500 text-white rounded mt-3 hover:bg-orange-600"
+          className="p-4  bg-[linear-gradient(92.69deg,_#EB5E5C_-0.64%,_#FF7674_101.09%)] text-white rounded mt-3 hover:bg-orange-600"
         >
           Iniciar sesión
         </button>
       </form>
-      <p>
+      <p >
         Si aún no tiene una cuenta por favor haga click{" "}
         <Link className="text-sky-900 underline" to={"/register"}>
           aquí!
         </Link>
       </p>
+      
     </main>
+    <footer className="fixed bottom-0 left-0 right-0 p-8 flex justify-between text-white w-[430px] mx-auto   bg-[linear-gradient(92.69deg,_#EB5E5C_-0.64%,_#FF7674_101.09%)]" >
+
+    </footer>
+   </div>
+    
+
   );
 };
 
