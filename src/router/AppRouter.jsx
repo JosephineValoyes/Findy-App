@@ -15,7 +15,7 @@ const AppRouter = () => {
     <Router>
       <Routes>
         <Route path="/" element={<Layout />} >
-          <Route path="/" element={<Login/>} />
+          <Route index element={<Login/>} />
           <Route element={<PublicRoutes isAuthenticated={user.isAuth} />}>
             <Route path='login' element={<Login />} />
             <Route path='register' element={<Register />} />

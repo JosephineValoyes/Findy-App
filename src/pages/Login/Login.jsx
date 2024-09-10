@@ -7,7 +7,7 @@ import { login } from "../../services/userServices";
 import useAppContext from "../../hooks/useAppContext";
 
 const Login = () => {
-  const navigate = useNavigate();
+  const navegate = useNavigate();
   const [showpassword,setShowPassword] = useState(false)
   const { userDispatch } = useAppContext();
 
@@ -24,7 +24,7 @@ const Login = () => {
           payload: loggedUser,
         });
         alert(`${loggedUser.name}, te damos la bienvenida`);
-        navigate("/dashboard");
+        navegate("/dashboard");
       } else {
         alert(
           "Ha ocurrido un error en el inicio de sesión, por favor verifique sus credenciales"
@@ -47,7 +47,7 @@ const Login = () => {
         </div>
       </header>
       <main className="flex  flex-col h-[600px] items-center grow gap-16 mt-8 px-2 absolute top-20 bg-white rounded-10 border-radius-[10]">
-      <button onClick={() => Navigate(-1)}  className="absolute left-4 mt-4 ">
+      <button onClick={() => navegate(-1)}  className="absolute left-4 mt-4 ">
         <FaArrowLeft />
       </button>
       <h1 className="font-serif text-center mt-4 text-2xl">Iniciar sesión</h1>

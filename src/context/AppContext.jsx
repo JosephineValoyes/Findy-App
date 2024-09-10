@@ -16,6 +16,8 @@ const AppContextProvider = ({ children }) => {
   const [news, newsDispatch] = useReducer(newsReducer, {
     news: [],
     statusFilter: false,
+    loading: false,
+    error: null,
   });
 
   const globalState = {
