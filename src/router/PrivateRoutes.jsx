@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 const PrivateRoutes = ({
   isAuthenticated,
-  redirectPath = "/login",
+  redirectPath = "/profile",
   children,
 }) => {
   if (!isAuthenticated) {
